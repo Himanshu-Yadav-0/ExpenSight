@@ -22,6 +22,7 @@ class ExpenseForReconcile(BaseModel):
     amount: float
     currency: str
     category: str
+    status: str
     date: datetime
 
     class Config:
@@ -34,10 +35,10 @@ class ReconcileResponse(BaseModel):
     """
     id: int
     convertedAmount: float
-    baseCurrency: str
-    conversionCurrency: str
-    fxRate: float
-    createdAt: datetime
+    baseCurrency: Optional[str] = None
+    conversionCurrency: Optional[str] = None
+    fxRate: Optional[float] = None
+    createdAt: Optional[datetime] = None
     expense: ExpenseForReconcile
 
     class Config:

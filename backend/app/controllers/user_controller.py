@@ -8,6 +8,7 @@ async def get_me(current_user):
     return {
         "id": current_user.id,
         "email": current_user.email,
+        "baseCurrency":current_user.baseCurrency,
         "created_at": current_user.created_at
     }
 

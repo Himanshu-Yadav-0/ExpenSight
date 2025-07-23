@@ -44,13 +44,19 @@ model Expense {
   userId  Int
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-
+  status             ReconciliationStatus @default(PENDING)
+  convertedAmount    Float?
+  conversionCurrency String?               
   // 🔗 One-to-one with Receipt
   receipt Receipts?
   reconciliations Reconcile[]
 
   user Users @relation(fields: [userId],references: [id])
   @@map("expenses")
+}
+enum ReconciliationStatus {
+  PENDING
+  RECONCILED
 }
 
 model Reconcile{

@@ -15,7 +15,7 @@ async def get_expenses_list(current_user=Depends(get_current_user)):
     """
     Retrieves a list of all expenses associated with the authenticated user.
     """
-    return await get_all_expenses(current_user=current_user)
+    return await get_all_expenses(user=current_user)
 
 @router.post("/",response_model=ExpenseOut,summary="Add Expense Manually")
 async def add_expense(expense:ExpenseIn,current_user=Depends(get_current_user)):

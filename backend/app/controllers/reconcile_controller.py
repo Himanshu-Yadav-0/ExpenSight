@@ -2,6 +2,7 @@ from fastapi import HTTPException
 from app.database.db import prisma
 from app.services.currency_service import get_historical_fx_rate
 from app.schemas.reconcile_schema import ReconcileCreate
+from datetime import datetime
 
 async def create_reconciliation(reconcile_data: ReconcileCreate, current_user):
     """
@@ -59,8 +60,31 @@ async def create_reconciliation(reconcile_data: ReconcileCreate, current_user):
         },
         include={'expense': True}
     )
+    # Step 1: Update the expense
+    await prisma.expense.update(
+        where={'id': expense.id},
+        data={
+            'status': 'RECONCILED',
+            'convertedAmount': converted_amount,
+            'conversionCurrency': to_currency.upper(),
+        }
+    )
 
-    return new_reconciliation
+    # Step 2: Fetch the updated expense with the required fields
+    updated_expense_data = await prisma.expense.find_unique(
+        where={'id': expense.id},
+    )
+
+    return {
+        "id": new_reconciliation.id,
+        "status":updated_expense_data.status,
+        "convertedAmount": new_reconciliation.convertedAmount,
+        "baseCurrency": new_reconciliation.baseCurrency,
+        "conversionCurrency": new_reconciliation.conversionCurrency,
+        "fxRate": new_reconciliation.fxRate,
+        "createdAt": datetime.now(),
+        "expense": updated_expense_data
+    }
 
 
 async def get_reconciliation_history(current_user):
@@ -78,10 +102,13 @@ async def get_reconciliation_history(current_user):
         A list of Reconcile objects.
     """
     history = await prisma.reconcile.find_many(
-        where={'userId': current_user.id},
-        include={'expense': True},
-        order={'createdAt': 'desc'}
+    where={'userId': current_user.id},
+    include={
+        'expense': True,
+    },
+    order={'createdAt': 'desc'}
     )
+
     return history
 
 async def get_reconciliation_history_for_expense(expense_id: int, current_user):
