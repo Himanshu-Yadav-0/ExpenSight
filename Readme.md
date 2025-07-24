@@ -1,12 +1,5 @@
-Here is your full `README.md` converted into clean, professional Markdown formatting:
-
----
 
 # 🚀 ExpenSight: AI-Powered Expense Management
-
-<p align="center">
-  <img src="https://i.imgur.com/gO0w8gL.png" alt="ExpenSight Dashboard Screenshot" width="800"/>
-</p>
 
 **ExpenSight** is a full-stack, AI-powered web application designed to simplify global expense management. It allows users to upload receipts, automatically extract key information using AI, and reconcile expenses across multiple currencies using historical exchange rates.
 
@@ -202,6 +195,4 @@ git push origin feature/AmazingFeature
 
 This project is licensed under the **MIT License**. See the [LICENSE](./LICENSE) file for details.
 
----
-
-Let me know if you'd like a downloadable `.md` file or README badge enhancements!
+### Made with love by Himanshu Yadav

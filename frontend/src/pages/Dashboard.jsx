@@ -54,10 +54,10 @@ const Dashboard = () => {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        <StatCard title="Total Receipts" value={stats.totalReceipts} change="All time" isLoading={isLoading} />
+        <StatCard title="Total expenses" value={stats.totalReceipts} change="All time" isLoading={isLoading} />
         <StatCard title="Converted" value={stats.converted} change="Successfully reconciled" isLoading={isLoading} />
         <StatCard title="Pending" value={stats.pending} change="Needs reconciliation" isLoading={isLoading} />
-        <StatCard title="This Month" value={stats.thisMonth} change="New receipts" isLoading={isLoading} />
+        <StatCard title="This Month" value={stats.thisMonth} change="New Expenses" isLoading={isLoading} />
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
