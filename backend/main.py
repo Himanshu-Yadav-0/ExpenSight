@@ -22,8 +22,9 @@ async def lifespan(app:FastAPI):
 app = FastAPI(title="ExpenSight",lifespan=lifespan)
 
 origins = [
-    "http://localhost:5173", # The default for Vite React
-    "http://localhost:3000", # The default for Create React App
+    "http://localhost:5173", 
+    "http://localhost:3000",
+    "https://expensight.thepenguinguy.info" 
 ]
 
 app.add_middleware(
@@ -41,6 +42,7 @@ app.include_router(expense_router)
 app.include_router(reconcile_router)
 app.include_router(dashboard_router.router)
 
+
 @app.get("/")
-def home():
-    return "Your App is Running"   
+async def root():
+    return {"message": "Expensight API running!"} 
