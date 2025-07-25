@@ -24,7 +24,9 @@ app = FastAPI(title="ExpenSight",lifespan=lifespan)
 origins = [
     "http://localhost:5173", 
     "http://localhost:3000",
-    "https://expensight.thepenguinguy.info" 
+    "https://expensight.thepenguinguy.info",
+    "https://expen-sight-frontend.vercel.app/",
+    "https://expensight.thepenguinguy.info/", 
 ]
 
 app.add_middleware(

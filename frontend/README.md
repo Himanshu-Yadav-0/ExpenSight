@@ -1,6 +1,3 @@
-Of course. Here is a complete `README.md` file for the frontend of your ExpenSight project, detailing its features, tech stack, and setup instructions.
-
------
 
 # ExpenSight Frontend
 
